@@ -1,5 +1,4 @@
-const button = document.getElementById('create-btn');
-
+import fs from 'node:fs'
 
 const getInfo = async () => {
     const [ tab ] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -16,9 +15,8 @@ const getInfo = async () => {
 
 ${description}
 `
-    const page = await chrome.webRequest.onCompleted(tab.id, {greeting: "hello"});
-    console.log(page);
-    // await fs.write(`${language}/${slug}/README.md`, md, 'utf-8', err => err ? console.error(err) : console.log('Success!'))
-    // await fs.write(`${language}/${slug}/solution.${extension}`, solution, 'utf-8', err => err ? console.error(err) : console.log('Success!'))
+    const solution = '';
+    await fs.write(`${language}/${slug}/README.md`, md, 'utf-8', err => err ? console.error(err) : console.log('Success!'))
+    await fs.write(`${language}/${slug}/solution.${extension}`, solution, 'utf-8', err => err ? console.error(err) : console.log('Success!'))
 }
 button.addEventListener('click', getInfo);
