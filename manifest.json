@@ -1,0 +1,17 @@
+{
+    "name": "codewars-auto-gen",
+    "description": "auto generate files in github repo",
+    "version": "1.0",
+    "manifest_version": 3,
+    "permissions": [
+        "activeTab",
+        "webRequest"
+    ],
+    "host_permissions": [
+        "https://www.codewars.com/*"
+    ],
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "codewars auto gen"
+    }
+}
