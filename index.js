@@ -1,24 +1,20 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
-const getInfo = async () => {
-    const url = process.argv[2];
-    const kataId = url.split('/')[4];
-    const language = url.split('/')[6];
-    const extension = language == 'javascript' ? 'js' :
-        language == 'python' ? 'py' :
-        language == 'typescript' ? 'ts' : 'txt';
-    
-    const response = await fetch(`https://www.codewars.com/api/v1/code-challenges/${kataId}`);
-    const { name, slug, description } = await response.json();
-    const md = `
-# ${name}
+// Get files in downloads directory that have extension .md or .js
+const READMEfiles = fs.readdirSync('D:/joshua/Downloads').filter(file => file.endsWith('.md'));
+const SolutionFiles = fs.readdirSync('D:/joshua/Downloads').filter(file => file.endsWith('.js'));
 
-${description}
-`
-    const solution = ' ';
-    fs.mkdirSync(`${language}/${slug}`);
-    fs.writeFileSync(`${language}/${slug}/README.md`, md, 'utf-8');
-    fs.writeFileSync(`${language}/${slug}/solution.${extension}`, solution, 'utf-8')
-}
-
-getInfo();
+// create folders for each md file and move the .md and .js files into the folder
+READMEfiles.forEach(async file => {
+    const folderName = file.split('-README')[0];
+    const solutionFile = SolutionFiles.find(file => file.startsWith(folderName));
+    const language = 
+        solutionFile.split('.')[1] === 'js' ? 'JavaScript' :
+        solutionFile.split('.')[1] === 'ts' ? 'TypeScript' :
+        solutionFile.split('.')[1] === 'py' ? 'Python' : 'Other';
+    fs.mkdirSync(`${language}/${folderName}`);
+    fs.cpSync(`D:/joshua/Downloads/${file}`, `${language}/${folderName}/README.md`);
+    fs.cpSync(`D:/joshua/Downloads/${solutionFile}`, `${language}/${folderName}/solution.${solutionFile.split('.')[1]}`);
+    fs.rmSync(`D:/joshua/Downloads/${file}`);
+    fs.rmSync(`D:/joshua/Downloads/${solutionFile}`);
+});
