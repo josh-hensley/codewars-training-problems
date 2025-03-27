@@ -2,7 +2,7 @@ import fs from 'node:fs';
 
 // Get files in downloads directory that have extension .md or .js
 const READMEfiles = fs.readdirSync('D:/joshua/Downloads').filter(file => file.endsWith('.md'));
-const SolutionFiles = fs.readdirSync('D:/joshua/Downloads').filter(file => file.endsWith('.js'));
+const SolutionFiles = fs.readdirSync('D:/joshua/Downloads').filter(file => file.endsWith('.js' || '.ts' || '.py'));
 
 // create folders for each md file and move the .md and .js files into the folder
 READMEfiles.forEach(async file => {

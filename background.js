@@ -1,5 +1,6 @@
-chrome.tabs.onUpdated.addListener((tabId, _changeinfo, tab) => {
-    if (tab.url && tab.url.includes("codewars.com/kata")) {
+chrome.tabs.onUpdated.addListener((tabId, changeinfo, tab) => {
+    const { status } = changeinfo;
+    if (status == 'complete' && tab.url && tab.url.includes("codewars.com/kata")) {
         const kataId = tab.url.split('/')[4];
         const language = tab.url.split('/')[6];
         const extension = language == 'javascript' ? 'js' :
