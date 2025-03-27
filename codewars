@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This script is used to move katas for downloads to this repo, and then push them to github
+
+$DATE=$(date +%Y-%m-%d)
+$CODEWARS_PATH = ~/code/codewars-training-problems
+
+cd $CODEWARS_PATH && npm start
+git add -A
+git commit -m "codewars exercises for $DATE"
+git push
