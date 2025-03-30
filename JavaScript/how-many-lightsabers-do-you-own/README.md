@@ -1,7 +1,6 @@
-
-        # How many lightsabers do you own?
+# How many lightsabers do you own?
         
-        Inspired by the development team at Vooza, write the function that 
+Inspired by the development team at Vooza, write the function that 
 
 * accepts the name of a programmer, and
 * returns the number of lightsabers owned by that person.
